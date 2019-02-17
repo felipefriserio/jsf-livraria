@@ -16,6 +16,9 @@ public class LivroBean {
 	private Livro livro = new Livro();
 	private Integer autorId;
 	
+	public List<Livro> getLivros(){
+		return new DAO<Livro>(Livro.class).listaTodos();
+	}
 	
 	public Livro getLivro() {
 		return livro;
