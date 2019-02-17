@@ -53,7 +53,11 @@ public class LivroBean {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
-			throw new RuntimeException("Livro deve ter pelo menos um Autor.");
+			/*throw new RuntimeException("Livro deve ter pelo menos um Autor.");*/
+			FacesContext.getCurrentInstance().addMessage("autor",  // client id, id no xhtml do component
+														  new FacesMessage("Livro deve ter pelo menos um autor")
+														);
+			return;
 		}
 
 		new DAO<Livro>(Livro.class).adiciona(this.livro);
