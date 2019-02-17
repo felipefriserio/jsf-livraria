@@ -19,11 +19,11 @@ public class LivroBean {
 
 	private Livro livro = new Livro();
 	private Integer autorId;
-	
-	public List<Livro> getLivros(){
+
+	public List<Livro> getLivros() {
 		return new DAO<Livro>(Livro.class).listaTodos();
 	}
-	
+
 	public Livro getLivro() {
 		return livro;
 	}
@@ -39,11 +39,11 @@ public class LivroBean {
 	public List<Autor> getAutores() {
 		return new DAO<Autor>(Autor.class).listaTodos();
 	}
-	
+
 	public List<Autor> getAutoresDoLivro() {
 		return this.livro.getAutores();
 	}
-	
+
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);
@@ -53,10 +53,9 @@ public class LivroBean {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
 		if (livro.getAutores().isEmpty()) {
-			/*throw new RuntimeException("Livro deve ter pelo menos um Autor.");*/
-			FacesContext.getCurrentInstance().addMessage("autor",  // client id, id no xhtml do component
-														  new FacesMessage("Livro deve ter pelo menos um autor")
-														);
+			/* throw new RuntimeException("Livro deve ter pelo menos um Autor."); */
+			FacesContext.getCurrentInstance().addMessage("autor", // client id, id no xhtml do component
+					new FacesMessage("Livro deve ter pelo menos um autor"));
 			return;
 		}
 
@@ -64,13 +63,12 @@ public class LivroBean {
 
 		this.livro = new Livro();
 	}
-	
-	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException{
-	String valor = value.toString();
-	if (!valor.startsWith("1")) {
-		throw new ValidatorException(new FacesMessage("ISBN deveria comecar com 1"));
-	}
-		
+
+	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
+		String valor = value.toString();
+		if (!valor.startsWith("1")) {
+			throw new ValidatorException(new FacesMessage("ISBN deveria comecar com 1"));
+		}
 	}
 
 }
