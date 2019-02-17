@@ -13,10 +13,14 @@
 			<h:panelGrid columns="2">
 
 				<h:outputLabel value="Titulo:" for="titulo" />
-				<h:inputText id="titulo" value="#{livroBean.livro.titulo}" />
+				<h:inputText id="titulo" value="#{livroBean.livro.titulo}" 
+					required="true" requiredMessage="titulo obrigatorio"
+					validatorMessage="titulo nao pode ser superior a 40">
+					<f:validateLength maximum="40"/>
+				</h:inputText>	
 
 				<h:outputLabel value="ISBN:" for="isbn" />
-				<h:inputText id="isbn" value="#{livroBean.livro.isbn}" />
+				<h:inputText id="isbn" value="#{livroBean.livro.isbn}" validator="#{livroBean.comecaComDigitoUm}"/>
 
 				<h:outputLabel value="Preço:" for="preco" />
 				<h:inputText id="preco" value="#{livroBean.livro.preco}" />
