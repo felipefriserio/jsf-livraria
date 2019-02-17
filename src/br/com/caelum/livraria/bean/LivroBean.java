@@ -6,8 +6,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.caelum.livraria.dao.DAO;
-import br.com.caelum.livraria.modelo.Autor;
-import br.com.caelum.livraria.modelo.Livro;
+import br.com.caelum.livraria.model.Autor;
+import br.com.caelum.livraria.model.Livro;
 
 @ManagedBean
 @ViewScoped
