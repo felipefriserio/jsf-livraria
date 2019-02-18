@@ -4,6 +4,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head/>
+
 <h:body>
 	<h1>Novo Livro</h1>
 	<h:form>
@@ -17,6 +19,7 @@
 					requiredMessage="titulo obrigatorio"
 					validatorMessage="titulo nao pode ser superior a 40">
 					<f:validateLength maximum="40"/>
+					<f:ajax listener="#{livroBean.teste}" render="dataLancamento"/>
 				</h:inputText>	
 
 				<h:outputLabel value="ISBN:" for="isbn" />
@@ -45,15 +48,16 @@
 			<legend> Dados do Autor </legend>
 			<h:outputLabel value="Selecione Autor:" for="autor" />
 
-			<h:selectOneMenu value="#{livroBean.autorId}">
+			<h:selectOneMenu value="#{livroBean.autorId}" id="autor">
 				<f:selectItems value="#{livroBean.autores}" var="autor"
 					itemLabel="#{autor.nome}" itemValue="#{autor.id}">
 				</f:selectItems>
 			</h:selectOneMenu>
-			<h:commandButton value="Gravar Autor"
-				action="#{livroBean.gravarAutor}" />
+			<h:commandButton value="Gravar Autor" action="#{livroBean.gravarAutor}" >
+				<f:ajax execute="autor" render="tabelaAutores"/>
+			</h:commandButton>
 
-			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor">
+			<h:dataTable value="#{livroBean.autoresDoLivro}" var="autor" id="tabelaAutores"> 
 				<h:column>
 					<h:outputText value="#{autor.nome}" />
 				</h:column>
@@ -76,7 +80,9 @@
 
 		<h:column>
 			<f:facet name="header">Preço</f:facet>
-			<h:outputText value="#{livro.preco}" />
+			<h:outputText value="#{livro.preco}" >
+				<f:convertNumber type="currency" pattern="R$ #0.00" currencySymbol="R$" locale="pt_BR"/>
+			</h:outputText>
 		</h:column>
 
 		<h:column>

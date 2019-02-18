@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.bean;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -7,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.validator.ValidatorException;
 
 import br.com.caelum.livraria.dao.DAO;
@@ -64,6 +66,14 @@ public class LivroBean {
 		this.livro = new Livro();
 	}
 
+	public void teste(AjaxBehaviorEvent event) {
+		System.out.println(event);
+		Calendar data = Calendar.getInstance();
+		data.add(Calendar.DAY_OF_MONTH, 10);
+		
+		this.livro.setDataLancamento(data);
+	}
+	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
 		String valor = value.toString();
 		if (!valor.startsWith("1")) {
